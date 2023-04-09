@@ -5,6 +5,7 @@ import "./loginForm.css";
 import UserContext from "../UserContext/UserContext";
 import Cookies from "js-cookie";
 import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { useNavigate } from "react-router-dom";
 
 function LoginForm(props) {
@@ -12,7 +13,8 @@ function LoginForm(props) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
-  const navigate= useNavigate()
+  const navigate = useNavigate();
+  
   const handleEmailChange = (event) => {
     setEmail(event.target.value);
   };
@@ -20,6 +22,7 @@ function LoginForm(props) {
   const handlePasswordChange = (event) => {
     setPassword(event.target.value);
   };
+  
   // Function to validate email format
   function isValidEmail(email) {
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -43,18 +46,22 @@ function LoginForm(props) {
       setErrorMessage("Password must be at least 6 characters long");
       return;
     }
+    axios.defaults.headers.common["Accept"] = "application/json";
+
     axios
-      .post(`${process.env.REACT_APP_API_URL}/login`, { email, password })
+      .post(`http://localhost:8000/api/login`, { email, password })
       .then((response) => {
         const authToken = response.data.access_token;
+        navigate("/profile");
         setToken(authToken);
         setIsLoggedIn(true);
         setErrorMessage("");
-
-        toast.success("Login successful!");
-        // Set the 'auth-token' cookie with an expiration of 1 hour
-        Cookies.set("auth-token", authToken, { expires: 1 }); //1day
-        navigate("/")
+        // Show a success toast when login is successful
+        toast.success("Login successful!", {
+          position: "top-right"
+        });
+        // Set the 'auth-token' cookie with an expiration of 1 day
+        Cookies.set("auth-token", authToken, { expires: 1 }); 
       })
       .catch((error) => {
         if (error.response && error.response.status === 401) {
@@ -62,11 +69,16 @@ function LoginForm(props) {
         } else {
           setErrorMessage("An error occurred, please try again");
         }
+        // Show an error toast when login fails
+        toast.error(errorMessage, {
+          position: "top-right"
+        });
       });
   };
 
   return (
-    <>
+    <div className="login-container">
+
       <form onSubmit={handleLogin} className="login-form">
         <h1>Login</h1>
         {errorMessage && <p className="error-message">{errorMessage}</p>}
@@ -98,7 +110,7 @@ function LoginForm(props) {
 
         <LoginButton />
       </form>
-    </>
+    </div>
   );
 }
 

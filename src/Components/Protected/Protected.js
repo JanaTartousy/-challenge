@@ -10,7 +10,12 @@ const Protected = ({ isLoggedIn, children }) => {
     );
   }
 
-  return children;
+  return (
+    <div>
+      <h1>Welcome to your profile</h1>
+      {children}
+    </div>
+  );
 };
 
 export default Protected;

@@ -5,6 +5,10 @@
     height: 100vh;
     
   }
+  .login-nav {
+    display: none;
+  }
+  
   /* .login-container {
     position: absolute;
     top: 0;
