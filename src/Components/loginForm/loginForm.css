@@ -1,0 +1,52 @@
+.login-form {
+    border-radius: 10px;
+    padding: 30px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+    width: 474px;
+    height: 400px;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(255, 255, 255, 0.5);
+  }
+  
+  .login-input-labels {
+    position: relative;
+    margin-bottom: 20px;
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+  }
+  
+  .login-input-labels input {
+    width: 100%;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+    background-color: transparent;
+    transition: all 0.3s ease;
+  }
+  
+  .login-input-labels input:focus {
+    outline: none;
+  }
+  
+  .login-input-labels .label-name {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    color: #383636;
+    font-size: 16px;
+    pointer-events: none;
+    transition: all 0.3s ease;
+  }
+  
+  .login-input-labels input:focus + .label-name,
+  .login-input-labels input:not(:placeholder-shown) + .label-name {
+    top: -15px;
+    left: 0;
+    font-size: 12px;
+  }
+  

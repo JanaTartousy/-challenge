@@ -1,0 +1,8 @@
+.nav-container{
+    background-color: purple;
+    padding: 20px;
+}
+.nav-container h1{
+    color: white;
+    text-align: center;
+}
