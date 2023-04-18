@@ -27,7 +27,7 @@ function App() {
           <Navbar />
           {isLoggedIn ? (
             <button onClick={handleLogout}>Logout</button>
-          ) : (
+           ) : (
             <Link to="/login">Login</Link>
           )}
           <Routes>
